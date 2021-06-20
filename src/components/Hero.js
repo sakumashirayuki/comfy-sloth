@@ -5,9 +5,23 @@ import heroBcg from '../assets/hero-bcg.jpeg'
 import heroBcg2 from '../assets/hero-bcg-2.jpeg'
 
 const Hero = () => {
-  return <h4>hero</h4>
+  return <Wrapper className="section-center">
+      <article className="content">
+        <h1>
+          design your <br /> comfort zone
+        </h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium omnis necessitatibus voluptatum fugit dolores quia excepturi nisi quas magnam possimus?
+        </p>
+        <Link to="/products" className="btn hero-btn">shop now</Link>
+      </article>
+      <article className="img-container">
+        <img src={heroBcg} alt="nice table" className="main-img"/>
+        <img src={heroBcg2} alt="person working" className="accent-img"/>
+      </article>
+    </Wrapper>
 }
-
+// position: relative; in .main-img is redundant
 const Wrapper = styled.section`
   min-height: 60vh;
   display: grid;
