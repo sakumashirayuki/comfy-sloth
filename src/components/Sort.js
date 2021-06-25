@@ -31,7 +31,7 @@ const Sort = () => {
       </div>
       <p>{products.length} products found</p>
       <hr />
-      <form action="">
+      <form>
         <label htmlFor="sort">sort by</label>
         <select name="sort" id="sort" className="sort-input" value={sort} onChange={updateSort}>
           <option value="price-lowest">price (lowest)</option>
