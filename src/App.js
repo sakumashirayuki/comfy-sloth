@@ -19,9 +19,9 @@ function App() {
           <Products />
         </Route>
         <Route path="/products/:id" children={<SingleProduct />}/>
-        <Route path="/checkout">
+        <PrivateRoute path="/checkout">
           <Checkout />
-        </Route>
+        </PrivateRoute>
         <Route exact path="/">
           <Home />
         </Route>
