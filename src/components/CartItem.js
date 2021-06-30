@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { formatPrice } from "../utils/helpers";
 import AmountButtons from "./AmountButtons";
-import { FaCheck, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
 const CartItem = ({ id, image, name, color, price, amount }) => {
     const { removeItem, toggleAmount } = useCartContext();
