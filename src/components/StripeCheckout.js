@@ -13,6 +13,7 @@ import { useUserContext } from '../context/user_context'
 import { formatPrice } from '../utils/helpers'
 import { useHistory } from 'react-router-dom'
 
+// this component will communicate with netlify functions
 const CheckoutForm = () => {
   return <h4>hello from Stripe Checkout </h4>
 }
