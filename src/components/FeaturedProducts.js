@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useProductsContext } from "../context/products_context";
 import { Link } from "react-router-dom";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs";
@@ -13,6 +13,36 @@ const FeaturedProducts = () => {
     productsError: error,
     featuredProducts: featured,
   } = useProductsContext();
+
+  const [beginIndex, setBeginIndex] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  const n = featured.length;
+
+  const prevPage = () => {
+    setBeginIndex((prevIndex)=>{
+      return (prevIndex + 3) % n;
+    });
+  }
+
+  const nextPage = () => {
+    setBeginIndex((prevIndex)=>{
+      return (prevIndex - 3 + n) % n;
+    });
+  }
+
+  useEffect(()=>{
+    if(seconds===5){
+      nextPage();
+      setSeconds(0);
+    }
+    let interval = null;
+    interval = setInterval(()=>{
+      setSeconds(seconds => seconds + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [seconds])
+  
   if (loading) return <Loading />;
   if (error) return <Error />;
 
@@ -23,15 +53,15 @@ const FeaturedProducts = () => {
         <div className="underline"></div>
       </div>
       <div className="section-center carousel">
-        <button className="trans-btn">
+        <button className="trans-btn" onClick={prevPage}>
             <BsCaretLeftFill />
         </button>
         <div className="featured">
-          {featured.slice(0, 3).map((product) => (
+          {featured.slice(beginIndex, beginIndex + 3).map((product) => (
             <Product key={product.id} {...product} />
           ))}
         </div>
-        <button className="trans-btn">
+        <button className="trans-btn" onClick={nextPage}>
             <BsCaretRightFill />
         </button>
       </div>
@@ -53,6 +83,7 @@ const Wrapper = styled.section`
     gap: 2.5rem;
     img {
       height: 225px;
+      object-fit: cover;
     }
   }
   .btn {
@@ -63,7 +94,7 @@ const Wrapper = styled.section`
   }
   @media (min-width: 576px) {
     .featured {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
   }
 `;
